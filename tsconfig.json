@@ -1,0 +1,47 @@
+{
+    "compilerOptions": {
+        "outDir": "bin",
+        "target": "es6",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "declaration": true,
+        "sourceMap": true,
+        "stripInternal": true,
+        "experimentalDecorators": true,
+        "pretty": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitAny": true,
+        "noImplicitReturns": true,
+        "forceConsistentCasingInFileNames": true,
+        "strictNullChecks": true
+    },
+    "files": [
+        "src/index.ts",
+
+        "src/async/cancel.ts",
+        "src/async/stream.ts",
+
+        "src/cmd/index.ts",
+        "src/cmd/exec.ts",
+        "src/cmd/options.ts",
+        "src/cmd/spawn.ts",
+
+        "src/fs/index.ts",
+
+        "src/jsonlike/index.ts",
+
+        "src/net/index.ts",
+
+        "src/time/index.ts",
+
+        "src/web/index.ts",
+        "src/web/http.ts",
+        "src/web/url.ts",
+
+        "tests/util.ts",
+        "tests/jsonlike.ts",
+        "tests/web/http.ts",
+        "tests/web/url.ts"
+    ]
+}
+
