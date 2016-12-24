@@ -1,9 +1,9 @@
 // Copyright 2016 Joe Duffy. All rights reserved.
 
-'use strict';
+"use strict";
 
-const DEFAULT_DASH: string = '--';
-const DEFAULT_DELIMITER: string = '=';
+const DEFAULT_DASH: string = "--";
+const DEFAULT_DELIMITER: string = "=";
 
 // Optionally appends an option argument, `arg`, whose name is `name`, to an array of `options`.
 export function defineOption(options: string[], arg: any, name: string, opts?: IDelimitOptions): void {
@@ -54,7 +54,7 @@ export function defineOptionArray(options: string[], args: any[], name: string, 
 }
 
 export interface IDelimitOptions {
-    // The dash to use; by default, '--'.
+    // The dash to use; by default, "--".
     dash?: string;
     // The delimiter to use to separate `--arg<delim>value`. A null means to pass the value as an entirely distinct
     // argument.  By default, `=`, as in `--arg=value`.
@@ -62,7 +62,7 @@ export interface IDelimitOptions {
     // The delimiter to use to separate multiple array values `--arg<delim>value`.  A null means to pass the value as
     // an entirely distinct argument.  By default, null, as in `--arg` `value` `--arg` `value`.
     arrayDelimiter?: string | null;
-    // If true, boolean args are passed explicitly as 'true' and 'false'; else they stand alone.  For example,
+    // If true, boolean args are passed explicitly as "true" and "false"; else they stand alone.  For example,
     // --flag=true or --flag=false versus --flag and nothing, respectively.
     explicitBooleans?: boolean;
 }

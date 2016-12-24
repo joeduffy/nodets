@@ -1,9 +1,9 @@
 // Copyright 2016 Joe Duffy. All rights reserved.
 
-'use strict';
+"use strict";
 
-import * as assert from 'assert';
-import * as net from 'net';
+import * as assert from "assert";
+import * as net from "net";
 
 const DEFAULT_BACKOFF_DELAY = 2; // Default delay in milliseconds.
 const DEFAULT_BACKOFF_MULTIPLIER = 2; // Default backoff multiplier.
@@ -43,8 +43,8 @@ export async function waitForPort(host: string, port: number, policy?: IBackoffP
                 done = true;
                 resolve(true);
             });
-            sock.on('error', (err: Error) => {
-                if ((<any>err).code === 'ECONNREFUSED') {
+            sock.on("error", (err: Error) => {
+                if ((<any>err).code === "ECONNREFUSED") {
                     // This is OK; we will retry after the timeout.
                 }
                 else {

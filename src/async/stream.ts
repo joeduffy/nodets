@@ -1,6 +1,6 @@
 // Copyright 2016 Joe Duffy. All rights reserved.
 
-'use strict';
+"use strict";
 
 /** An asynchronous stream of values. */
 export interface IStream<T> {

@@ -1,8 +1,8 @@
 // Copyright 2016 Joe Duffy. All rights reserved.
 
-'use strict';
+"use strict";
 
-import * as url from 'url';
+import * as url from "url";
 
 // A few helper methods for dealing with URLs.
 export abstract class Url {
@@ -23,24 +23,24 @@ export abstract class Url {
                 }
             }
 
-            let extract: string = path ? path.substring(0, index) : '';
-            let firstAppendIsSlash: boolean = (append && append[0] === '/') ? true : false;
-            let lastExistingIsSlash: boolean = (extract && extract[extract.length-1] === '/') ? true : false;
+            let extract: string = path ? path.substring(0, index) : "";
+            let firstAppendIsSlash: boolean = (append && append[0] === "/") ? true : false;
+            let lastExistingIsSlash: boolean = (extract && extract[extract.length-1] === "/") ? true : false;
             if (!firstAppendIsSlash && (!extract || !lastExistingIsSlash)) {
                 // If the existing path doesn't already have a trailing /, and the piece to append doesn't begin with
                 // one, we need to explicitly delimit the new appended piece with one.
-                extract += '/';
+                extract += "/";
             }
             else if (firstAppendIsSlash && lastExistingIsSlash) {
                 // If the existing path ends with a /, and the new piece starts with one, eliminate one so we don't
                 // end up with double adjacent slashes (i.e., //).
                 append = append.substring(1);
             }
-            return extract + append + (path ? path.substring(index) : '');
+            return extract + append + (path ? path.substring(index) : "");
         };
 
         // Join the paths, but use our helper above to ensure we don't end up with adjacent slashes.
-        let joined: string = '';
+        let joined: string = "";
         for (let path of paths) {
             joined = appendAt(joined, path);
         }
@@ -54,7 +54,7 @@ export abstract class Url {
         result.pathname = appendAt(result.pathname, joined);
 
         {
-            let queryIndex = result.path ? result.path.indexOf('?') : -1;
+            let queryIndex = result.path ? result.path.indexOf("?") : -1;
             if (queryIndex !== -1) {
                 // If there's a querystring part, inject our new path just before it.
                 result.path = appendAt(result.path, joined, queryIndex);
@@ -66,8 +66,8 @@ export abstract class Url {
         }
 
         {
-            let queryIndex = result.href ? result.href.indexOf('?') : -1;
-            let anchorIndex = result.href ? result.href.indexOf('#') : -1;
+            let queryIndex = result.href ? result.href.indexOf("?") : -1;
+            let anchorIndex = result.href ? result.href.indexOf("#") : -1;
             if (queryIndex !== -1) {
                 // If there's a querystring, like above, inject our new path just before it.
                 result.href = appendAt(result.href, joined, queryIndex);

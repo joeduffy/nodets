@@ -1,6 +1,6 @@
 // Copyright 2016 Joe Duffy. All rights reserved.
 
-'use strict';
+"use strict";
 
 /** A "JSON-like" map of strings to primitive values. */
 export interface IJSONObject {
@@ -18,8 +18,8 @@ export interface IJSONArray extends Array<JSONValue> { }
 export function clone(obj: IJSONObject): IJSONObject {
     let newObj: IJSONObject = {};
     for (let key of Object.keys(obj)) {
-        if (!key || typeof key !== 'string') {
-            throw new Error('Invalid non-string key in JSON-like object');
+        if (!key || typeof key !== "string") {
+            throw new Error("Invalid non-string key in JSON-like object");
         }
         newObj[key] = cloneValue(obj[key]);
     }
@@ -28,7 +28,7 @@ export function clone(obj: IJSONObject): IJSONObject {
 
 /** This function deep clones a JSON-like value, including primitives, arrays, and objects. */
 export function cloneValue(val: JSONValue): JSONValue {
-    if (val === null || typeof val === 'string' || typeof val === 'number' || typeof val === 'boolean') {
+    if (val === null || typeof val === "string" || typeof val === "number" || typeof val === "boolean") {
         // Primitive types need no cloning.
         return val;
     }
@@ -55,7 +55,7 @@ export function isArray(value: JSONValue): boolean {
 
 /** Checks whether the given JSONValue is a boolean. */
 export function isBoolean(value: JSONValue): boolean {
-    return (typeof value === 'boolean');
+    return (typeof value === "boolean");
 }
 
 /** Checks whether the given JSONValue is a map. */
@@ -66,12 +66,12 @@ export function isMap(value: JSONValue): boolean {
 
 /** Checks whether the given JSONValue is a number. */
 export function isNumber(value: JSONValue): boolean {
-    return (typeof value === 'number');
+    return (typeof value === "number");
 }
 
 /** Checks whether the given JSONValue is a string. */
 export function isString(value: JSONValue): boolean {
-    return (typeof value === 'string');
+    return (typeof value === "string");
 }
 
 // Functions that fetch an JSONValue as a particular type.  This encapsulates messy type casting.
@@ -136,16 +136,16 @@ export function asString(value: JSONValue | undefined): string | null | undefine
 /** Fetches the given key from the map. */
 export function get(obj: IJSONObject, key: string): JSONValue | null | undefined {
     if (!obj) {
-        throw new Error('An object is required');
+        throw new Error("An object is required");
     }
     if (!key) {
-        throw new Error('A non-empty key is required');
+        throw new Error("A non-empty key is required");
     }
 
     // Keys are allowed to be "compound" (that is, with slashes); do the lookup accordingly.
     let fullKey: string = key;
     while (true) {
-        let keySlash: number = key.indexOf('/');
+        let keySlash: number = key.indexOf("/");
         if (keySlash === -1) {
             return obj[key];
         }
@@ -156,7 +156,7 @@ export function get(obj: IJSONObject, key: string): JSONValue | null | undefined
                 return val;
             }
             if (!isMap(val)) {
-                throw new Error(`Compound key '${fullKey}' could not be loaded, because '${keyPart}' is not a map`);
+                throw new Error(`Compound key "${fullKey}" could not be loaded, because "${keyPart}" is not a map`);
             }
             obj = <IJSONObject>val;
             key = key.substring(keySlash+1);
@@ -168,7 +168,7 @@ export function get(obj: IJSONObject, key: string): JSONValue | null | undefined
 export function getRequired(obj: IJSONObject, key: string): JSONValue {
     let result: JSONValue | undefined = get(obj, key);
     if (result === undefined) {
-        throw new Error(`Key '${key}' is missing from the object`);
+        throw new Error(`Key "${key}" is missing from the object`);
     }
     return result;
 }
@@ -189,10 +189,10 @@ export function getArray(obj: IJSONObject, key: string): IJSONArray | null | und
 export function getRequiredArray(obj: IJSONObject, key: string): IJSONArray {
     let result: IJSONArray | null | undefined = getArray(obj, key);
     if (result === undefined) {
-        throw new Error(`Key '${key}' is missing from the object`);
+        throw new Error(`Key "${key}" is missing from the object`);
     }
     if (result === null) {
-        throw new Error(`Key '${key}' exists, but it is null`);
+        throw new Error(`Key "${key}" exists, but it is null`);
     }
     return result;
 }
@@ -213,10 +213,10 @@ export function getBoolean(obj: IJSONObject, key: string): boolean | null | unde
 export function getRequiredBoolean(obj: IJSONObject, key: string): boolean {
     let result: boolean | null | undefined = getBoolean(obj, key);
     if (result === undefined) {
-        throw new Error(`Key '${key}' is missing from the object`);
+        throw new Error(`Key "${key}" is missing from the object`);
     }
     if (result === null) {
-        throw new Error(`Key '${key}' exists, but it is null`);
+        throw new Error(`Key "${key}" exists, but it is null`);
     }
     return result;
 }
@@ -237,10 +237,10 @@ export function getMap(obj: IJSONObject, key: string): IJSONObject | null | unde
 export function getRequiredMap(obj: IJSONObject, key: string): IJSONObject {
     let result: IJSONObject | null | undefined = getMap(obj, key);
     if (result === undefined) {
-        throw new Error(`Key '${key}' is missing from the object`);
+        throw new Error(`Key "${key}" is missing from the object`);
     }
     if (result === null) {
-        throw new Error(`Key '${key}' exists, but it is null`);
+        throw new Error(`Key "${key}" exists, but it is null`);
     }
     return result;
 }
@@ -261,10 +261,10 @@ export function getNumber(obj: IJSONObject, key: string): number | null | undefi
 export function getRequiredNumber(obj: IJSONObject, key: string): number {
     let result: number | null | undefined = getNumber(obj, key);
     if (result === undefined) {
-        throw new Error(`Key '${key}' is missing from the object`);
+        throw new Error(`Key "${key}" is missing from the object`);
     }
     if (result === null) {
-        throw new Error(`Key '${key}' exists, but it is null`);
+        throw new Error(`Key "${key}" exists, but it is null`);
     }
     return result;
 }
@@ -285,10 +285,10 @@ export function getString(obj: IJSONObject, key: string): string | null | undefi
 export function getRequiredString(obj: IJSONObject, key: string): string {
     let result: string | null | undefined = getString(obj, key);
     if (result === undefined) {
-        throw new Error(`Key '${key}' is missing from the object`);
+        throw new Error(`Key "${key}" is missing from the object`);
     }
     if (result === null) {
-        throw new Error(`Key '${key}' exists, but it is null`);
+        throw new Error(`Key "${key}" exists, but it is null`);
     }
     return result;
 }
@@ -296,16 +296,16 @@ export function getRequiredString(obj: IJSONObject, key: string): string {
 /** Sets the given key in the map. */
 export function set(obj: IJSONObject, key: string, value: JSONValue | undefined): void {
     if (!obj) {
-        throw new Error('An object is required');
+        throw new Error("An object is required");
     }
     if (!key) {
-        throw new Error('A non-empty key is required');
+        throw new Error("A non-empty key is required");
     }
 
     // Keys are allowed to be "compound" (that is, with slashes); do the lookup accordingly.
     let fullKey: string = key;
     while (true) {
-        let keySlash: number = key.indexOf('/');
+        let keySlash: number = key.indexOf("/");
         if (keySlash === -1) {
             if (value === undefined) {
                 delete obj[key];
@@ -322,7 +322,7 @@ export function set(obj: IJSONObject, key: string, value: JSONValue | undefined)
                 obj = obj[keyPart] = {};
             }
             else if (!isMap(val)) {
-                throw new Error(`Compound key '${fullKey}' could not be loaded, because '${keyPart}' is not a map`);
+                throw new Error(`Compound key "${fullKey}" could not be loaded, because "${keyPart}" is not a map`);
             }
             else {
                 obj = <IJSONObject>val;

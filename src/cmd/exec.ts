@@ -1,8 +1,8 @@
 // Copyright 2016 Joe Duffy. All rights reserved.
 
-'use strict';
+"use strict";
 
-import { spawn } from './spawn';
+import { spawn } from "./spawn";
 
 /** Executes a command, blocks awaiting its exit, and then returns the results. */
 export async function exec(command: string, args?: string[], opts?: IExecOptions,

@@ -1,12 +1,12 @@
 // Copyright 2016 Joe Duffy. All rights reserved.
 
-'use strict';
+"use strict";
 
-import * as crypto from 'crypto';
-import * as fs from 'fs';
-import * as mkdirpModule from 'mkdirp';
-import * as path from 'path';
-import * as os from 'os';
+import * as crypto from "crypto";
+import * as fs from "fs";
+import * as mkdirpModule from "mkdirp";
+import * as path from "path";
+import * as os from "os";
 
 /** Changes the permissions mode on the target file. */
 export function chmod(path: string, mode: number): Promise<void> {
@@ -22,7 +22,7 @@ export function chmod(path: string, mode: number): Promise<void> {
     });
 }
 
-/** Checks whether the given path exists, returning true if it does, false if it doesn't. */
+/** Checks whether the given path exists, returning true if it does, false if it doesn"t. */
 export async function exists(path: string): Promise<boolean> {
     return new Promise<boolean>((resolve) => {
         fs.lstat(path, (err: NodeJS.ErrnoException) => {
@@ -84,7 +84,7 @@ export function readDir(path: string): Promise<string[]> {
 /** Reads a file from the given path. */
 export function readFile(path: string): Promise<string> {
     return new Promise<string>((resolve, reject) => {
-        fs.readFile(path, 'utf8', (err: NodeJS.ErrnoException, data: string) => {
+        fs.readFile(path, "utf8", (err: NodeJS.ErrnoException, data: string) => {
             if (err) {
                 reject(err);
             }
@@ -167,14 +167,14 @@ export function tmpName(prefix?: string, suffix?: string): string {
         nameBytes = crypto.pseudoRandomBytes(length);
     }
 
-    let name: string = '';
-    const legalChars: string = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    let name: string = "";
+    const legalChars: string = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     for (let i: number = 0; i < length; i++) {
         name += legalChars[nameBytes[i] % legalChars.length];
     }
 
-    prefix = prefix || '';
-    suffix = suffix || '';
+    prefix = prefix || "";
+    suffix = suffix || "";
     return path.join(os.tmpdir(), prefix + name + suffix);
 }
 

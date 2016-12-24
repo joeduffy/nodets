@@ -1,8 +1,8 @@
 // Copyright 2016 Joe Duffy. All rights reserved.
 
-'use strict';
+"use strict";
 
-import * as childProcess from 'child_process';
+import * as childProcess from "child_process";
 
 /** Executes a command and returns a handle to the process plus a promise for its completion. */
 export function spawn(command: string, args?: string[], opts?: ISpawnOptions,
@@ -45,11 +45,11 @@ export function spawn(command: string, args?: string[], opts?: ISpawnOptions,
 
     // Hook the stdout stream, if appropriate.
     let stdoutLines: string[] = [];
-    let stdoutBuffer: string = '';
-    handle.stdout.on('data', (data: any) => {
+    let stdoutBuffer: string = "";
+    handle.stdout.on("data", (data: any) => {
         stdoutBuffer += data;
         let newLineIndex: number;
-        while ((newLineIndex = stdoutBuffer.indexOf('\n')) !== -1) {
+        while ((newLineIndex = stdoutBuffer.indexOf("\n")) !== -1) {
             let line: string = stdoutBuffer.substring(0, newLineIndex);
             if (opts && opts.captureStdout) {
                 stdoutLines.push(line);
@@ -70,12 +70,12 @@ export function spawn(command: string, args?: string[], opts?: ISpawnOptions,
     // Hook the stderr stream.  We do this even if the caller didn't ask us to, so we can provide better error
     // messages should the command fail.
     let stderrLines: string[] = [];
-    let stderrBuffer: string = '';
+    let stderrBuffer: string = "";
     let lastStderrLine: string;
-    handle.stderr.on('data', (data: any) => {
+    handle.stderr.on("data", (data: any) => {
         stderrBuffer += data;
         let newLineIndex: number;
-        while ((newLineIndex = stderrBuffer.indexOf('\n')) !== -1) {
+        while ((newLineIndex = stderrBuffer.indexOf("\n")) !== -1) {
             let line: string = stderrBuffer.substring(0, newLineIndex);
             if (opts && opts.captureStderr) {
                 stderrLines.push(line);
@@ -96,14 +96,14 @@ export function spawn(command: string, args?: string[], opts?: ISpawnOptions,
 
     // Create a promise for the resulting information when the process exits.
     let result = new Promise<ISpawnResult>((resolve, reject) => {
-        handle.on('error', (err: Error) => {
+        handle.on("error", (err: Error) => {
             reject(<ISpawnError>{
                 inner: err,
-                message: 'Failed to spawn process: ' + err,
-                name: 'ExecError',
+                message: "Failed to spawn process: " + err,
+                name: "ExecError",
             });
         });
-        handle.on('close', (code: number) => {
+        handle.on("close", (code: number) => {
             if (dbgoutCb) {
                 dbgoutCb(`Exec command: ${command}: [exit code: ${code}]`);
             }
@@ -127,7 +127,7 @@ export function spawn(command: string, args?: string[], opts?: ISpawnOptions,
                 reject({
                     code: code,
                     message: message,
-                    name: 'ExecError',
+                    name: "ExecError",
                     stderr: stderrLines,
                     stdout: stdoutLines,
                 });
