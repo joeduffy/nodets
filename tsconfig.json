@@ -32,6 +32,8 @@
 
         "src/jsonlike/index.ts",
 
+        "src/object/index.ts",
+
         "src/net/index.ts",
 
         "src/time/index.ts",
