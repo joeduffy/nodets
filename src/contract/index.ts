@@ -10,26 +10,29 @@ const failMsg: string = "A failure has occurred";
 const assertMsg: string = "An assertion failure has occurred";
 
 export function fail(): never {
-    return failf(failMsg);
+    return failfast(failMsg);
 }
 
 export function failf(msg: string, ...args: any[]): never {
-    let msgf: string = util.format(msg, ...args);
-    console.error(msgf);
-    console.error(new Error().stack);
-    process.exit(failCode);
-    throw new Error(msgf); // this will never be reached, due to the os.exit, but makes TSC happy.
+    return failfast(`${failMsg}: ${util.format(msg, ...args)}`);
 }
 
 export function assert(b: boolean): void {
     if (!b) {
-        failf(assertMsg);
+        return failfast(assertMsg);
     }
 }
 
 export function assertf(b: boolean, msg: string, ...args: any[]): void {
     if (!b) {
-        failf(assertMsg, ...args);
+        return failfast(`${assertMsg}: ${util.format(msg, ...args)}`);
     }
+}
+
+function failfast(msg: string): never {
+    console.error(msg);
+    console.error(new Error().stack);
+    process.exit(failCode);
+    while (true) {} // this will never be reached, thanks to process.exit, but makes TSC happy.
 }
 
