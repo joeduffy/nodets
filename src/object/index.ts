@@ -11,3 +11,27 @@ export function extend(...args: any[]): any {
     return res;
 }
 
+export function maybeNull<T, U>(t: T | null, func: (t: T) => U): U | null {
+    if (t === null) {
+        return null;
+    }
+    return func(t);
+}
+
+export function maybeUndefined<T, U>(t: T | undefined, func: (t: T) => U): U | undefined {
+    if (t === undefined) {
+        return undefined;
+    }
+    return func(t);
+}
+
+export function maybeNund<T, U>(t: T | null | undefined, func: (t: T) => U): U | null | undefined {
+    if (t === null) {
+        return null;
+    }
+    else if (t === undefined) {
+        return undefined;
+    }
+    return func(t);
+}
+
