@@ -30,8 +30,8 @@ export function assertf(b: boolean, msg: string, ...args: any[]): void {
 }
 
 function failfast(msg: string): never {
-    console.error(msg);
-    console.error(new Error().stack);
+    Error.stackTraceLimit = 1000;
+    console.error(new Error(msg).stack);
     process.exit(failCode);
     while (true) {} // this will never be reached, thanks to process.exit, but makes TSC happy.
 }
