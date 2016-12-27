@@ -26,6 +26,8 @@
         "src/cmd/options.ts",
         "src/cmd/spawn.ts",
 
+        "src/contract/index.ts",
+
         "src/fs/index.ts",
 
         "src/jsonlike/index.ts",
@@ -38,8 +40,9 @@
         "src/web/http.ts",
         "src/web/url.ts",
 
-        "tests/util.ts",
+        "tests/contract.ts",
         "tests/jsonlike.ts",
+        "tests/util.ts",
         "tests/web/http.ts",
         "tests/web/url.ts"
     ]
