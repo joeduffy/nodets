@@ -27,21 +27,20 @@ let ignoreLogger: ILogger = {
     fatalf: (msg: string, ...args: any[]) => {},
 };
 
-export function Get(t?: number): ILogger {
-    if (!!t || t >= v) {
+let loglevel: number = 0;
+
+export function configure(threshold: number): void {
+    loglevel = threshold;
+}
+
+export function out(target?: number): ILogger {
+    if (target === undefined || v(target)) {
         return consoleLogger;
     }
     return ignoreLogger;
 }
 
-let v: number = 0;
-
-export function Set(t: number): void {
-    v = t;
+export function v(target: number): boolean {
+    return (target <= loglevel);
 }
-
-export function V(t: number): boolean {
-    return (v >= t);
-}
-
 
