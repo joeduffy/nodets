@@ -7,9 +7,10 @@ import * as cmd from "./cmd";
 import * as contract from "./contract";
 import * as fs from "./fs";
 import * as jsonlike from "./jsonlike";
+import * as log from "./log";
 import * as object from "./object";
 import * as net from "./net";
 import * as time from "./time";
 import * as web from "./web";
-export { async, cmd, contract, fs, jsonlike, object, net, time, web };
+export { async, cmd, contract, fs, jsonlike, log, object, net, time, web };
 
