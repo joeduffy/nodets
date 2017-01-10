@@ -10,15 +10,14 @@ import * as util from "util";
 
 const assertMsg: string = "An assertion failure has occurred";
 
-export function assert(b: boolean): void {
+export function assert(b: boolean, msg?: string, ...args: any[]): void {
     if (!b) {
-        return failfast(assertMsg);
-    }
-}
-
-export function assertf(b: boolean, msg: string, ...args: any[]): void {
-    if (!b) {
-        return failfast(`${assertMsg}: ${util.format(msg, ...args)}`);
+        if (msg) {
+            return failfast(`${assertMsg}: ${util.format(msg, ...args)}`);
+        }
+        else {
+            return failfast(assertMsg);
+        }
     }
 }
 
@@ -26,12 +25,13 @@ export function assertf(b: boolean, msg: string, ...args: any[]): void {
 
 const failMsg: string = "A failure has occurred";
 
-export function fail(): never {
-    return failfast(failMsg);
-}
-
-export function failf(msg: string, ...args: any[]): never {
-    return failfast(`${failMsg}: ${util.format(msg, ...args)}`);
+export function fail(msg?: string, ...args: any[]): never {
+    if (msg) {
+        return failfast(`${failMsg}: ${util.format(msg, ...args)}`);
+    }
+    else {
+        return failfast(failMsg);
+    }
 }
 
 const failCode = -227;
@@ -47,15 +47,14 @@ function failfast(msg: string): never {
 
 const requiresMsg: string = "'s precondition has bee violated";
 
-export function requires(b: boolean, arg: string): void {
+export function requires(b: boolean, arg: string, msg?: string, ...args: any[]): void {
     if (!b) {
-        return failfast(`${arg}${requiresMsg}`);
-    }
-}
-
-export function requiresf(b: boolean, arg: string, msg: string, ...args: any[]): void {
-    if (!b) {
-        return failfast(`${arg}${requiresMsg}: ${util.format(msg, ...args)}`);
+        if (msg) {
+            return failfast(`${arg}${requiresMsg}: ${util.format(msg, ...args)}`);
+        }
+        else {
+            return failfast(`${arg}${requiresMsg}`);
+        }
     }
 }
 

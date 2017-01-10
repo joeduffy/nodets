@@ -9,6 +9,6 @@ function contractFailReturn(): number {
 }
 
 function contractFailfReturn(): number {
-    return contract.failf("Test %s", "failf");
+    return contract.fail("Test %s", "failf");
 }
 
