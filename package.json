@@ -1,6 +1,6 @@
 {
   "name": "nodejs-ts",
-  "version": "0.5.2",
+  "version": "0.5.4",
   "description": "A library of helper routines to make Node.js in TypeScript easier and more enjoyable.",
   "repository": "https://github.com/joeduffy/nodets",
   "author": "Joe Duffy (joeduffy@acm.org)",
@@ -8,7 +8,8 @@
   "typings": "bin/src/index.d.ts",
   "scripts": {
     "build": "tsc && tslint src/*.ts src/**/*.ts",
-    "postinstall": "npm run build",
+    "buildonly": "tsc",
+    "postinstall": "npm run buildonly",
     "test": "npm run cov && npm run covreport",
     "cov": "istanbul cover --print none node_modules/.bin/_mocha -- --recursive --timeout 15000 bin/tests/",
     "covreport": "istanbul report text-summary && istanbul report text"
