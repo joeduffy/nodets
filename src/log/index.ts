@@ -2,7 +2,7 @@
 
 "use strict";
 
-import * as contract from '../contract';
+import * as contract from "../contract";
 
 export interface ILogger {
     info(msg: string, ...args: any[]): void;
