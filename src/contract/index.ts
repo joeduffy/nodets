@@ -43,6 +43,12 @@ function failfast(msg: string): never {
     while (true) {} // this will never be reached, thanks to process.exit, but makes TSC happy.
 }
 
+// Ignore:
+
+export function ignore(o: any): void {
+    // Intentionally blank; callers use this jsut to explicitly ignore the value.
+}
+
 // Requires preconditions:
 
 const requiresMsg: string = "'s precondition has bee violated";
